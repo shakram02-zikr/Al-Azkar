@@ -1,4 +1,5 @@
 import 'package:alazkar/src/core/helpers/azkar_helper.dart';
+import 'package:alazkar/src/features/share_as_image/presentation/screens/reference_screen.dart';
 import 'package:alazkar/src/features/share_as_image/presentation/screens/share_as_image_screen.dart';
 import 'package:alazkar/src/features/zikr_content_viewer/presentation/controller/bloc/zikr_content_viewer_bloc.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,22 @@ class ZikrContentViewerBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (state.activeZikr.footnote.isNotEmpty) ...[
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return ReferenceScreen(
+                        text: state.activeZikr.footnote,
+                      );
+                    },
+                  ),
+                );
+              },
+              icon: const Icon(Icons.info_outline),
+            )
+          ],
           IconButton(
             onPressed: () async {
               context

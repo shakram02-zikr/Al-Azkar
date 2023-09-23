@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
-class Zikr extends Equatable {
+class ZikrText extends Equatable {
   final int id;
   final int titleId;
+  final int subZikrId;
   final int order;
   final String body;
   final String source;
@@ -13,9 +12,10 @@ class Zikr extends Equatable {
   final int count;
   final String footnote;
 
-  const Zikr({
+  const ZikrText({
     required this.id,
     required this.titleId,
+    required this.subZikrId,
     required this.order,
     required this.body,
     required this.source,
@@ -28,6 +28,7 @@ class Zikr extends Equatable {
     return <String, dynamic>{
       'id': id,
       'titleId': titleId,
+      'subZikrId': subZikrId,
       'order': order,
       'body': body,
       'source': source,
@@ -37,10 +38,11 @@ class Zikr extends Equatable {
     };
   }
 
-  factory Zikr.fromMap(Map<String, dynamic> map) {
-    return Zikr(
+  factory ZikrText.fromMap(Map<String, dynamic> map) {
+    return ZikrText(
       id: map['id'] as int,
       titleId: map['titleId'] as int,
+      subZikrId: map['subZikrId'] as int,
       order: map['order'] as int,
       body: map['body'] as String,
       source: (map['source'] as String?) ?? "",
@@ -52,12 +54,13 @@ class Zikr extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory Zikr.fromJson(String source) =>
-      Zikr.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ZikrText.fromJson(String source) =>
+      ZikrText.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  Zikr copyWith({
+  ZikrText copyWith({
     int? id,
     int? titleId,
+    int? subZikrId,
     int? order,
     String? body,
     String? source,
@@ -65,9 +68,10 @@ class Zikr extends Equatable {
     int? count,
     String? footnote,
   }) {
-    return Zikr(
+    return ZikrText(
       id: id ?? this.id,
       titleId: titleId ?? this.titleId,
+      subZikrId: subZikrId ?? this.subZikrId,
       order: order ?? this.order,
       body: body ?? this.body,
       source: source ?? this.source,
@@ -82,6 +86,7 @@ class Zikr extends Equatable {
     return [
       id,
       titleId,
+      subZikrId,
       order,
       body,
       source,

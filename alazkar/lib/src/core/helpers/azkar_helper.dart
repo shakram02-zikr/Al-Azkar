@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:alazkar/src/core/models/zikr.dart';
+import 'package:alazkar/src/core/models/zikr_text.dart';
 import 'package:alazkar/src/core/models/zikr_title.dart';
 import 'package:alazkar/src/core/utils/app_print.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -125,8 +128,13 @@ class AzkarDBHelper {
 
     final List<Map<String, dynamic>> maps =
         await db.rawQuery('SELECT * FROM contents WHERE titleId = ?', [id]);
+    // TODO: Load sub-zikr item
+
 
     return List.generate(maps.length, (i) {
+      
+      maps.where((Map<String,dynamic> element) => )
+      // ZikrText.fromMap(maps[i])
       return Zikr.fromMap(maps[i]);
     });
   }

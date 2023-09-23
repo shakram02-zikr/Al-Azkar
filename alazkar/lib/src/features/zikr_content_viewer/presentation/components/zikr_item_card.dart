@@ -46,7 +46,7 @@ class ZikrItemCard extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             children: [
               Text(
-                zikr.body,
+                zikr.body, // Render quran using Uthmanic font
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontFamily: "Kitab",

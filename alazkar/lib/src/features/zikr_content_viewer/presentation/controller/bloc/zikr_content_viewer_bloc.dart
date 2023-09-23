@@ -4,6 +4,7 @@ import 'package:alazkar/src/core/helpers/azkar_helper.dart';
 import 'package:alazkar/src/core/manager/volume_button_manager.dart';
 import 'package:alazkar/src/core/models/zikr.dart';
 import 'package:alazkar/src/core/models/zikr_title.dart';
+import 'package:alazkar/src/core/utils/app_print.dart';
 import 'package:alazkar/src/core/utils/show_toast.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -56,6 +57,7 @@ class ZikrContentViewerBloc
     final azkarToSet =
         await azkarDBHelper.getContentByTitleId(event.zikrTitle.id);
 
+    appPrint("Azkir to set:$azkarToSet");
     emit(
       ZikrContentViewerLoadedState(
         zikrTitle: zikrTitle,
