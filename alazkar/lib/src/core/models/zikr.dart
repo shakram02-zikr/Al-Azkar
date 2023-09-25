@@ -1,13 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:alazkar/src/core/models/zikr_text.dart';
 import 'package:equatable/equatable.dart';
 
 class Zikr extends Equatable {
   final int id;
   final int titleId;
   final int order;
-  final String body;
+  final List<ZikrText> body;
   final String source;
   final String fadl;
   final int count;
@@ -37,12 +38,12 @@ class Zikr extends Equatable {
     };
   }
 
-  factory Zikr.fromMap(Map<String, dynamic> map) {
+  factory Zikr.fromMap(Map<String, dynamic> map, List<ZikrText> zikrText) {
     return Zikr(
       id: map['id'] as int,
       titleId: map['titleId'] as int,
       order: map['order'] as int,
-      body: map['body'] as String,
+      body: zikrText,
       source: (map['source'] as String?) ?? "",
       fadl: (map['fadl'] as String?) ?? "",
       count: map['count'] as int,
@@ -52,14 +53,16 @@ class Zikr extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory Zikr.fromJson(String source) =>
-      Zikr.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Zikr.fromJson(String source, List<ZikrText> zikrText) => Zikr.fromMap(
+        json.decode(source) as Map<String, dynamic>,
+        zikrText,
+      );
 
   Zikr copyWith({
     int? id,
     int? titleId,
     int? order,
-    String? body,
+    List<ZikrText>? body,
     String? source,
     String? fadl,
     int? count,
@@ -89,5 +92,16 @@ class Zikr extends Equatable {
       fadl,
       footnote,
     ];
+  }
+
+  String get fullText {
+    return body.map((t) => t.text).join("\n");
+  }
+
+  String get fullSource {
+    return body
+        .map((t) => t.attachment)
+        .where((attachment) => attachment.isNotEmpty)
+        .join(", ");
   }
 }

@@ -1,54 +1,43 @@
 import 'dart:convert';
+import 'package:alazkar/src/core/models/zikr_text_type.dart';
 import 'package:equatable/equatable.dart';
 
 class ZikrText extends Equatable {
   final int id;
-  final int titleId;
-  final int subZikrId;
-  final int order;
-  final String body;
-  final String source;
-  final String fadl;
-  final int count;
-  final String footnote;
+  final int zikrId;
+  final int textOrder;
+  final String text;
+  final ZikrTextType type;
+  final String attachment;
 
   const ZikrText({
     required this.id,
-    required this.titleId,
-    required this.subZikrId,
-    required this.order,
-    required this.body,
-    required this.source,
-    required this.fadl,
-    required this.count,
-    required this.footnote,
+    required this.zikrId,
+    required this.textOrder,
+    required this.text,
+    required this.type,
+    required this.attachment,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'titleId': titleId,
-      'subZikrId': subZikrId,
-      'order': order,
-      'body': body,
-      'source': source,
-      'fadl': fadl,
-      'count': count,
-      'footnote': footnote,
+      'zikrId': zikrId,
+      'textOrder': textOrder,
+      'text': text,
+      'type': type,
+      'attachment': attachment,
     };
   }
 
   factory ZikrText.fromMap(Map<String, dynamic> map) {
     return ZikrText(
       id: map['id'] as int,
-      titleId: map['titleId'] as int,
-      subZikrId: map['subZikrId'] as int,
-      order: map['order'] as int,
-      body: map['body'] as String,
-      source: (map['source'] as String?) ?? "",
-      fadl: (map['fadl'] as String?) ?? "",
-      count: map['count'] as int,
-      footnote: (map['footnote'] as String?) ?? "",
+      zikrId: map['zikrId'] as int,
+      textOrder: map['textOrder'] as int,
+      text: map['text'] as String,
+      type: ZikrTextType.fromString(map['type'] as String),
+      attachment: (map['attachment'] as String?) ?? "",
     );
   }
 
@@ -61,23 +50,17 @@ class ZikrText extends Equatable {
     int? id,
     int? titleId,
     int? subZikrId,
-    int? order,
-    String? body,
-    String? source,
-    String? fadl,
-    int? count,
-    String? footnote,
+    String? text,
+    ZikrTextType? type,
+    String? attachment,
   }) {
     return ZikrText(
       id: id ?? this.id,
-      titleId: titleId ?? this.titleId,
-      subZikrId: subZikrId ?? this.subZikrId,
-      order: order ?? this.order,
-      body: body ?? this.body,
-      source: source ?? this.source,
-      fadl: fadl ?? this.fadl,
-      count: count ?? this.count,
-      footnote: footnote ?? this.footnote,
+      zikrId: titleId ?? this.zikrId,
+      textOrder: subZikrId ?? this.textOrder,
+      text: text ?? this.text,
+      type: type ?? this.type,
+      attachment: attachment ?? this.attachment,
     );
   }
 
@@ -85,14 +68,11 @@ class ZikrText extends Equatable {
   List<Object> get props {
     return [
       id,
-      titleId,
-      subZikrId,
-      order,
-      body,
-      source,
-      count,
-      fadl,
-      footnote,
+      zikrId,
+      textOrder,
+      text,
+      type,
+      attachment,
     ];
   }
 }
